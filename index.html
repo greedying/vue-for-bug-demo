@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no, address=no, email=no" />
+    <meta name="x5-orientation" content="portrait" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="screen-orientation" content="portrait" />
+    <meta name="full-screen" content="yes" />
+    <title>vue for-loop bug test</title>
+    <script src="//cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+</head>
+<body ontouchstart>
+  <div id="app">
+   <div>
+     <h1>names</h2>
+     <ul>
+       <li v-for='name in names'>{{ name }}</li>
+    </ul>
+   </div>
+
+   <div>
+     <h1>names of for(in)</h2>
+     <ul>
+       <li v-for='name in names1'>{{ name }}</li>
+    </ul>
+   </div>
+   <div>
+     <h1>names of for(;;)</h2>
+     <ul>
+       <li v-for='name in names2'>{{ name }}</li>
+    </ul>
+   </div>
+
+   <input type="text" v-model="newFruit" />
+   <button @click="add">add</button>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        names: [
+          'apple',
+          'peal',
+          'peach'
+        ],
+        newFruit: ''
+      },
+      computed: {
+        names1: function () {
+          var names = [];
+          for(var i in this.names) {
+            names.push(this.names[i]);
+          }
+          return names;
+        },
+        names2: function () {
+          var names = [];
+          for(var i = 0; i < this.names.length; i++) {
+            names.push(this.names[i]);
+          }
+          return names;
+        }
+      },
+      methods: {
+        add: function () {
+          this.names.push(this.newFruit);
+          this.newFruit = '';
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
