@@ -34,6 +34,13 @@
     </ul>
    </div>
 
+   <div>
+     <h1>names of for(in) in common js </h2>
+     <ul>
+       <li v-for='name in names3'>{{ name }}</li>
+    </ul>
+   </div>
+
    <input type="text" v-model="newFruit" />
    <button @click="add">add</button>
   </div>
@@ -63,7 +70,19 @@
             names.push(this.names[i]);
           }
           return names;
-        }
+        },
+        names3: function () {
+          var names = [
+            'apple',
+            'peal',
+            'peach'
+          ];
+          var newNames = [];
+          for(var i in names) {
+            newNames.push(names[i]);
+          }
+          return newNames;
+        },
       },
       methods: {
         add: function () {
